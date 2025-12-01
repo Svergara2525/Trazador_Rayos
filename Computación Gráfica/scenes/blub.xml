@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<image name="blub">
+
+  <raster>
+    <W>500</W>
+    <H>500</H>
+    <backgroundColor>0.83 0.93 0.83</backgroundColor>
+  </raster>
+  
+  <rayTracer>
+    <wblock>32</wblock>
+    <hblock>32</hblock>
+    <showProgress>true</showProgress>
+  </rayTracer>  
+  
+  <engine>
+    <illumination>false</illumination>
+    <recursionDepth>5</recursionDepth>
+  </engine>
+
+  <camera>
+    <position>-2.25 0.95 +2.25</position>
+    <lookAt>-0.25 0.25 0.25</lookAt>
+    <up>0.0 1.0 0.0</up>
+  </camera>
+
+  <projection type="perspective">
+    <fov>42.5</fov>
+    <aspect>1.0</aspect>
+  </projection>
+  
+  <lights> 
+    <light type="omnidirectional">
+      <position>-5.0 20.0 -8.0</position>
+      <spectrum>0.33 0.33 0.34</spectrum>
+      <power>3000</power>
+    </light>
+    <light type="spot">
+      <position>-10.0 3.0 20.0</position>
+      <lookAt>0.0 0.1 0.0</lookAt>
+      <aperture>70</aperture>
+      <attenuationExponent>0.5</attenuationExponent>
+      <spectrum>0.34 0.33 0.33</spectrum>
+      <power>1250</power>
+    </light>
+    <light type="directional">
+      <position>-10.0 3.0 20.0</position>
+      <lookAt>0.0 0.1 0.0</lookAt>
+      <radius>60</radius>
+      <attenuationExponent>12.5</attenuationExponent>
+      <spectrum>0.34 0.33 0.33</spectrum>
+      <power>1500</power>
+    </light>
+  </lights>
+  
+  <materials>
+    <brdf id="green-chinaware" type="Cook-Torrance">           
+      <diffuseReflectance>0.35 0.65 0.30</diffuseReflectance>
+      <specularReflectance>0.30 0.30 0.40</specularReflectance>
+      <ndf>Beckmann</ndf>
+      <beta>75</beta>
+    </brdf>   
+    <brdf id="bone-china" type="Oren-Nayar">        
+      <diffuseReflectance>0.8935 0.9275 0.9265</diffuseReflectance>
+      <specularReflectance>0.03 0.04 0.04</specularReflectance>
+      <ndf>GGX</ndf>
+      <beta>5</beta> 
+      <sigma>70.0</sigma>
+    </brdf>    
+    <brdf id="ground" type="Cook-Torrance">
+<!--      <specularReflectance>0.0 0.0 0.0</specularReflectance>      
+      <diffuseReflectance>1.0 1.0 1.0</diffuseReflectance>-->
+      <specularReflectance>0.66 0.70 0.77</specularReflectance>
+      <diffuseReflectance>0.20 0.30 0.20</diffuseReflectance>       
+      <ndf>GGX</ndf>
+      <beta>25</beta>                       
+    </brdf>    
+  </materials>
+  
+  <models>
+    <model id="floor" type="plane">
+      <normal>0.0 1.0 0.0</normal>
+      <point>0.0 -1.5 0.0</point>
+    </model>
+    
+    <model id="blub" type="mesh">
+<!--      <objFile>cmu/blub_quadrangulated.obj</objFile> -->
+      <objFile>cmu/blub_triangulated.obj</objFile>
+      <flat>false</flat>      
+    </model>
+  </models>  
+    
+  <scene>
+    <object>
+      <modelId>floor</modelId>
+<!--      <materialId>ground</materialId>-->
+      <color>0.66 0.70 0.77</color>
+    </object>
+    <object>
+<!--      <color>0.95 0.50 0.50</color>-->
+      <textureFile>cmu/blub_texture.png</textureFile>
+      <modelId>blub</modelId>
+<!--      <materialId>bone-china</materialId>-->
+    </object>
+  </scene>
+  
+</image>
